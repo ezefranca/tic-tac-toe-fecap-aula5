@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    tools:context=".MainActivity" >
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="200dp"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/titulo_tela_jogo"
+            android:textSize="14dp" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        >
+
+        <Button
+            android:id="@+id/botao_0_0"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginRight="5dp"
+            android:onClick="pegarBotaoClicado"
+            android:textColor="@color/cor_do_x"
+            android:textSize="30sp" />
+
+        <Button
+            android:id="@+id/botao_0_1"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginRight="5dp"
+            android:onClick="pegarBotaoClicado"
+            android:textColor="@color/cor_do_x"
+            android:textSize="30dp" />
+
+        <Button
+            android:id="@+id/botao_0_2"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginRight="5dp"
+            android:onClick="pegarBotaoClicado"
+            android:textColor="@color/cor_do_x"
+            android:textSize="30sp" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        >
+
+        <Button
+            android:id="@+id/botao_1_0"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginRight="5dp"
+            android:onClick="pegarBotaoClicado"
+            android:textColor="@color/cor_do_x"
+            android:textSize="30sp" />
+
+        <Button
+            android:id="@+id/botao_1_1"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginRight="5dp"
+            android:onClick="pegarBotaoClicado"
+            android:textColor="@color/cor_do_x"
+            android:textSize="30sp" />
+
+        <Button
+            android:id="@+id/botao_1_2"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginRight="5dp"
+            android:onClick="pegarBotaoClicado"
+            android:textColor="@color/cor_do_x"
+            android:textSize="30sp" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        >
+
+        <Button
+            android:id="@+id/botao_2_0"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginRight="5dp"
+            android:onClick="pegarBotaoClicado"
+            android:textColor="@color/cor_do_x"
+            android:textSize="30sp" />
+
+        <Button
+            android:id="@+id/botao_2_1"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginRight="5dp"
+            android:onClick="pegarBotaoClicado"
+            android:textColor="@color/cor_do_x"
+            android:textSize="30sp" />
+
+        <Button
+            android:id="@+id/botao_2_2"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginRight="5dp"
+            android:onClick="pegarBotaoClicado"
+            android:textColor="@color/cor_do_x"
+            android:textSize="30sp" />
+    </TableRow>
+</TableLayout>

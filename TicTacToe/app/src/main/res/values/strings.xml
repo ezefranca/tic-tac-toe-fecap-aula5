@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">TicTacToe</string>
+    <string name="titulo_tela_jogo">Jogo da Velha</string>
+</resources>
