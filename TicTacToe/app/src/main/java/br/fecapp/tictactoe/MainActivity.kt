@@ -10,6 +10,8 @@ class MainActivity : AppCompatActivity() {
 
     var deQuemEhAVez: Boolean = true
 
+    var acabouAPartida: Boolean = false
+
     var jogador1 : ArrayList<Int> = ArrayList<Int>()
     var jogador2 : ArrayList<Int> = ArrayList<Int>()
 
@@ -31,12 +33,11 @@ class MainActivity : AppCompatActivity() {
 
 
         // Verifica se o botão já foi clicado pelo jogador 1 ou jogador 2, caso sim, ele encerra a função com return
-        if (jogador1.contains(idDoBotaoClicado) || jogador2.contains(idDoBotaoClicado)) {
+        // Verifica que a partida acabou, caso sim, faz um return e não adiciona nenhum X ou O novo.
+        if ((jogador1.contains(idDoBotaoClicado) || jogador2.contains(idDoBotaoClicado)) || acabouAPartida) {
             // encerra a função
             return
         }
-
-
 
         // Lógica dos nossos turnos
         var simboloDaVez: String = "X"
@@ -46,7 +47,10 @@ class MainActivity : AppCompatActivity() {
             jogador1.add(idDoBotaoClicado)
             jogador1Venceu = checaSeJogadorVenceu(jogador1)
 
+
+
             if(jogador1Venceu) {
+                acabouAPartida = true
                 println("JOGADOR 1 UM VENCEU")
             }
 
@@ -57,6 +61,7 @@ class MainActivity : AppCompatActivity() {
             jogador2Venceu = checaSeJogadorVenceu(jogador2)
 
             if(jogador2Venceu) {
+                acabouAPartida = true
                 println("JOGADOR 2 DOIS VENCEU")
             }
 
@@ -66,54 +71,48 @@ class MainActivity : AppCompatActivity() {
         deQuemEhAVez = !deQuemEhAVez
 
 
-
         // Fim da Lógica dos turnos
-
 
         // Pegamos os IDS utilizando o R e comparamos com o nosso botao clicado ID
         // When substitui os nossos if else quando utilizamos kotlin
         when (idDoBotaoClicado) {
-            R.id.botao_0_0 -> {
-                botaoClicado.setText(simboloDaVez)
+                R.id.botao_0_0 -> {
+                    botaoClicado.setText(simboloDaVez)
+                }
+                R.id.botao_0_1 -> {
+                    botaoClicado.setText(simboloDaVez)
+                }
+                R.id.botao_0_2 -> {
+                    botaoClicado.setText(simboloDaVez)
+                }
+                R.id.botao_1_0 -> {
+                    botaoClicado.setText(simboloDaVez)
+                }
+                R.id.botao_1_1 -> {
+                    botaoClicado.setText(simboloDaVez)
+                }
+                R.id.botao_1_2 -> {
+                    botaoClicado.setText(simboloDaVez)
+                }
+                R.id.botao_2_0 -> {
+                    botaoClicado.setText(simboloDaVez)
+                }
+                R.id.botao_2_1 -> {
+                    botaoClicado.setText(simboloDaVez)
+                }
+                R.id.botao_2_2 -> {
+                    botaoClicado.setText(simboloDaVez)
+                }
             }
-            R.id.botao_0_1 -> {
-                botaoClicado.setText(simboloDaVez)
-            }
-            R.id.botao_0_2 -> {
-                botaoClicado.setText(simboloDaVez)
-            }
-            R.id.botao_1_0 -> {
-                botaoClicado.setText(simboloDaVez)
-            }
-            R.id.botao_1_1 -> {
-                botaoClicado.setText(simboloDaVez)
-            }
-            R.id.botao_1_2 -> {
-                botaoClicado.setText(simboloDaVez)
-            }
-            R.id.botao_2_0 -> {
-                botaoClicado.setText(simboloDaVez)
-            }
-            R.id.botao_2_1 -> {
-                botaoClicado.setText(simboloDaVez)
-            }
-            R.id.botao_2_2 -> {
-                botaoClicado.setText(simboloDaVez)
-            }
-        }
 
 
 
-    /*
-       0 0 | 0 1 | 0 2
-       1 0 | 1 1 | 1 2
-       2 0 | 2 1 | 2 2
 
 
-     */
     }
 
     fun checaSeJogadorVenceu(jogador: ArrayList<Int>): Boolean {
+        // Lógica das Linhas
         if (jogador.contains(R.id.botao_0_0) && jogador.contains(R.id.botao_0_1) && jogador.contains(R.id.botao_0_2)) {
             return true
         }
@@ -121,8 +120,29 @@ class MainActivity : AppCompatActivity() {
             return true
         } else if (jogador.contains(R.id.botao_2_0) && jogador.contains(R.id.botao_2_1) && jogador.contains(R.id.botao_2_2)) {
             return true
+        // Lógica das Colunas
+        } else if (jogador.contains(R.id.botao_0_0) && jogador.contains(R.id.botao_1_0) && jogador.contains(R.id.botao_2_0)) {
+            return true
+        } else if (jogador.contains(R.id.botao_0_1) && jogador.contains(R.id.botao_1_1) && jogador.contains(R.id.botao_2_1)) {
+            return true
+        } else if (jogador.contains(R.id.botao_0_2) && jogador.contains(R.id.botao_1_2) && jogador.contains(R.id.botao_2_2)) {
+            return true
+        // Lógica das Diagonais
+        } else if (jogador.contains(R.id.botao_0_0) && jogador.contains(R.id.botao_1_1) && jogador.contains(R.id.botao_2_2)) {
+            return true
+        } else if (jogador.contains(R.id.botao_0_0) && jogador.contains(R.id.botao_1_1) && jogador.contains(R.id.botao_2_0)) {
+            return true
         }
 
+
         return false
+
+        /*
+   0 0 | 0 1 | 0 2
+   1 0 | 1 1 | 1 2
+   2 0 | 2 1 | 2 2
+
+
+ */
     }
 }
