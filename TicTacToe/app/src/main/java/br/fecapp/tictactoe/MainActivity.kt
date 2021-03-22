@@ -8,7 +8,13 @@ import android.widget.Toast
 
 class MainActivity : AppCompatActivity() {
 
-    var deQuemEhAVez: Boolean = false
+    var deQuemEhAVez: Boolean = true
+
+    var jogador1 : ArrayList<Int> = ArrayList<Int>()
+    var jogador2 : ArrayList<Int> = ArrayList<Int>()
+
+    var jogador1Venceu: Boolean = false
+    var jogador2Venceu: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,25 +30,42 @@ class MainActivity : AppCompatActivity() {
         val idDoBotaoClicado: Int = botaoClicado.id
 
 
+        // Verifica se o botão já foi clicado pelo jogador 1 ou jogador 2, caso sim, ele encerra a função com return
+        if (jogador1.contains(idDoBotaoClicado) || jogador2.contains(idDoBotaoClicado)) {
+            // encerra a função
+            return
+        }
+
+
+
         // Lógica dos nossos turnos
         var simboloDaVez: String = "X"
 
         if (deQuemEhAVez) {
             simboloDaVez = "O"
+            jogador1.add(idDoBotaoClicado)
+            jogador1Venceu = checaSeJogadorVenceu(jogador1)
+
+            if(jogador1Venceu) {
+                println("JOGADOR 1 UM VENCEU")
+            }
+
         } else {
             simboloDaVez = "X"
+            jogador2.add(idDoBotaoClicado)
+
+            jogador2Venceu = checaSeJogadorVenceu(jogador2)
+
+            if(jogador2Venceu) {
+                println("JOGADOR 2 DOIS VENCEU")
+            }
+
+
         }
         // inverte o valor de quem eh a vez
         deQuemEhAVez = !deQuemEhAVez
 
-        /*
-            if(deQuemEhAVez == true) {
-                deQuemEhAVez = false
-            } else {
-                deQuemEhAVez = true
-            }
 
-         */
 
         // Fim da Lógica dos turnos
 
@@ -79,6 +102,27 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+
+
+    /*
+       0 0 | 0 1 | 0 2
+       1 0 | 1 1 | 1 2
+       2 0 | 2 1 | 2 2
+
+
+     */
     }
 
+    fun checaSeJogadorVenceu(jogador: ArrayList<Int>): Boolean {
+        if (jogador.contains(R.id.botao_0_0) && jogador.contains(R.id.botao_0_1) && jogador.contains(R.id.botao_0_2)) {
+            return true
+        }
+        else if (jogador.contains(R.id.botao_1_0) && jogador.contains(R.id.botao_1_1) && jogador.contains(R.id.botao_1_2)) {
+            return true
+        } else if (jogador.contains(R.id.botao_2_0) && jogador.contains(R.id.botao_2_1) && jogador.contains(R.id.botao_2_2)) {
+            return true
+        }
+
+        return false
+    }
 }
