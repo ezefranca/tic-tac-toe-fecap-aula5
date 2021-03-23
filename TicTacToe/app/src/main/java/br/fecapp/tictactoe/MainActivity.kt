@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 
 class MainActivity : AppCompatActivity() {
@@ -31,6 +32,16 @@ class MainActivity : AppCompatActivity() {
         // Pega o ID do botão clicado
         val idDoBotaoClicado: Int = botaoClicado.id
 
+        // Logica do Reset
+        if (idDoBotaoClicado == R.id.botao_reset) {
+            val textoVitoriaID = R.id.textoVitoria
+            val textoVitoriaTextView = findViewById<TextView>(textoVitoriaID)
+            textoVitoriaTextView.visibility = View.GONE
+
+            val botaoResetID = R.id.botao_reset
+            val botaoReset = findViewById<Button>(botaoResetID)
+            botaoReset.visibility = View.INVISIBLE
+        }
 
         // Verifica se o botão já foi clicado pelo jogador 1 ou jogador 2, caso sim, ele encerra a função com return
         // Verifica que a partida acabou, caso sim, faz um return e não adiciona nenhum X ou O novo.
@@ -39,19 +50,22 @@ class MainActivity : AppCompatActivity() {
             return
         }
 
+
+
+
         // Lógica dos nossos turnos
         var simboloDaVez: String = "X"
+        var jogadorVitoriaFrase: String = "Jogador Venceu: "
 
         if (deQuemEhAVez) {
             simboloDaVez = "O"
             jogador1.add(idDoBotaoClicado)
             jogador1Venceu = checaSeJogadorVenceu(jogador1)
 
-
-
             if(jogador1Venceu) {
                 acabouAPartida = true
                 println("JOGADOR 1 UM VENCEU")
+                jogadorVitoriaFrase = jogadorVitoriaFrase + " " + simboloDaVez
             }
 
         } else {
@@ -63,6 +77,7 @@ class MainActivity : AppCompatActivity() {
             if(jogador2Venceu) {
                 acabouAPartida = true
                 println("JOGADOR 2 DOIS VENCEU")
+                jogadorVitoriaFrase = jogadorVitoriaFrase + " " + simboloDaVez
             }
 
 
@@ -70,6 +85,18 @@ class MainActivity : AppCompatActivity() {
         // inverte o valor de quem eh a vez
         deQuemEhAVez = !deQuemEhAVez
 
+        if (acabouAPartida) {
+            val botaoResetID = R.id.botao_reset
+            val botaoReset = findViewById<Button>(botaoResetID)
+            botaoReset.visibility = View.VISIBLE
+
+
+            val textoVitoriaID = R.id.textoVitoria
+            val textoVitoriaTextView = findViewById<TextView>(textoVitoriaID)
+            textoVitoriaTextView.visibility = View.VISIBLE
+            textoVitoriaTextView.text = jogadorVitoriaFrase
+
+        }
 
         // Fim da Lógica dos turnos
 
