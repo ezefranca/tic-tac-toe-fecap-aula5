@@ -1,16 +1,20 @@
 package br.fecapp.tictactoe
 
-import androidx.appcompat.app.AppCompatActivity
+import android.graphics.Color
+import android.graphics.*
+import android.graphics.LinearGradient
+import android.graphics.Shader
+import android.graphics.Shader.TileMode
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+
 
 class MainActivity : AppCompatActivity() {
 
     var deQuemEhAVez: Boolean = true
-
     var acabouAPartida: Boolean = false
 
     var jogador1 : ArrayList<Int> = ArrayList<Int>()
@@ -22,9 +26,33 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        estilizarTexto()
+    }
+
+    fun estilizarTexto() {
+        val textoTituloGame : TextView = findViewById(R.id.textoTitulo)
+
+        val gradiente = LinearGradient(
+                0F, // x0, x-coordinate for the start of the gradient line
+                0F, // y0,  y-coordinate for the start of the gradient line
+                100F, // x1,  x-coordinate for the end of the gradient line
+                // y1, y-coordinate for the end of the gradient line
+                textoTituloGame.height.toFloat(),
+                // color0, sRGB color at the start of the gradient line
+                Color.parseColor("#2980b9"),
+                // color1, sRGB color at the end of the gradient line
+                Color.parseColor("#8e44ad"),
+                // shader tiling mode
+                Shader.TileMode.MIRROR
+        )
+
+        textoTituloGame.paint.shader = gradiente
     }
 
     fun pegarBotaoClicado(viewClicada: View) {
+
+        val textoGameOver : TextView = findViewById(R.id.textoGameOver)
+        val botaoReset : Button = findViewById(R.id.botaoReset)
 
         // Faz o cast (conversão de View para Button)
         val botaoClicado: Button = viewClicada as Button
@@ -32,15 +60,9 @@ class MainActivity : AppCompatActivity() {
         // Pega o ID do botão clicado
         val idDoBotaoClicado: Int = botaoClicado.id
 
-        // Logica do Reset
-        if (idDoBotaoClicado == R.id.botao_reset) {
-            val textoVitoriaID = R.id.textoVitoria
-            val textoVitoriaTextView = findViewById<TextView>(textoVitoriaID)
-            textoVitoriaTextView.visibility = View.GONE
-
-            val botaoResetID = R.id.botao_reset
-            val botaoReset = findViewById<Button>(botaoResetID)
-            botaoReset.visibility = View.INVISIBLE
+        if (idDoBotaoClicado == R.id.botaoReset) {
+            textoGameOver.visibility = View.GONE
+            botaoReset.visibility = View.GONE
         }
 
         // Verifica se o botão já foi clicado pelo jogador 1 ou jogador 2, caso sim, ele encerra a função com return
@@ -50,12 +72,10 @@ class MainActivity : AppCompatActivity() {
             return
         }
 
-
-
-
         // Lógica dos nossos turnos
         var simboloDaVez: String = "X"
-        var jogadorVitoriaFrase: String = "Jogador Venceu: "
+
+
 
         if (deQuemEhAVez) {
             simboloDaVez = "O"
@@ -65,7 +85,9 @@ class MainActivity : AppCompatActivity() {
             if(jogador1Venceu) {
                 acabouAPartida = true
                 println("JOGADOR 1 UM VENCEU")
-                jogadorVitoriaFrase = jogadorVitoriaFrase + " " + simboloDaVez
+                textoGameOver.visibility = View.VISIBLE
+                botaoReset.visibility = View.VISIBLE
+                textoGameOver.text = "Jogador: $simboloDaVez WIN!! "
             }
 
         } else {
@@ -77,7 +99,9 @@ class MainActivity : AppCompatActivity() {
             if(jogador2Venceu) {
                 acabouAPartida = true
                 println("JOGADOR 2 DOIS VENCEU")
-                jogadorVitoriaFrase = jogadorVitoriaFrase + " " + simboloDaVez
+                textoGameOver.visibility = View.VISIBLE
+                botaoReset.visibility = View.VISIBLE
+                textoGameOver.text = "Jogador: $simboloDaVez WIN!! "
             }
 
 
@@ -85,18 +109,6 @@ class MainActivity : AppCompatActivity() {
         // inverte o valor de quem eh a vez
         deQuemEhAVez = !deQuemEhAVez
 
-        if (acabouAPartida) {
-            val botaoResetID = R.id.botao_reset
-            val botaoReset = findViewById<Button>(botaoResetID)
-            botaoReset.visibility = View.VISIBLE
-
-
-            val textoVitoriaID = R.id.textoVitoria
-            val textoVitoriaTextView = findViewById<TextView>(textoVitoriaID)
-            textoVitoriaTextView.visibility = View.VISIBLE
-            textoVitoriaTextView.text = jogadorVitoriaFrase
-
-        }
 
         // Fim da Lógica dos turnos
 
@@ -145,25 +157,28 @@ class MainActivity : AppCompatActivity() {
         }
         else if (jogador.contains(R.id.botao_1_0) && jogador.contains(R.id.botao_1_1) && jogador.contains(R.id.botao_1_2)) {
             return true
-        } else if (jogador.contains(R.id.botao_2_0) && jogador.contains(R.id.botao_2_1) && jogador.contains(R.id.botao_2_2)) {
+        }
+        else if (jogador.contains(R.id.botao_2_0) && jogador.contains(R.id.botao_2_1) && jogador.contains(R.id.botao_2_2)) {
             return true
         // Lógica das Colunas
-        } else if (jogador.contains(R.id.botao_0_0) && jogador.contains(R.id.botao_1_0) && jogador.contains(R.id.botao_2_0)) {
-            return true
-        } else if (jogador.contains(R.id.botao_0_1) && jogador.contains(R.id.botao_1_1) && jogador.contains(R.id.botao_2_1)) {
-            return true
-        } else if (jogador.contains(R.id.botao_0_2) && jogador.contains(R.id.botao_1_2) && jogador.contains(R.id.botao_2_2)) {
-            return true
-        // Lógica das Diagonais
-        } else if (jogador.contains(R.id.botao_0_0) && jogador.contains(R.id.botao_1_1) && jogador.contains(R.id.botao_2_2)) {
-            return true
-        } else if (jogador.contains(R.id.botao_0_0) && jogador.contains(R.id.botao_1_1) && jogador.contains(R.id.botao_2_0)) {
+        }
+        else if (jogador.contains(R.id.botao_0_0) && jogador.contains(R.id.botao_1_0) && jogador.contains(R.id.botao_2_0)) {
             return true
         }
-
-
+        else if (jogador.contains(R.id.botao_0_1) && jogador.contains(R.id.botao_1_1) && jogador.contains(R.id.botao_2_1)) {
+            return true
+        }
+        else if (jogador.contains(R.id.botao_0_2) && jogador.contains(R.id.botao_1_2) && jogador.contains(R.id.botao_2_2)) {
+            return true
+        }
+        // Lógica das Diagonais
+        else if (jogador.contains(R.id.botao_0_0) && jogador.contains(R.id.botao_1_1) && jogador.contains(R.id.botao_2_2)) {
+            return true
+        }
+        else if (jogador.contains(R.id.botao_0_2) && jogador.contains(R.id.botao_1_1) && jogador.contains(R.id.botao_2_2)) {
+            return true
+        }
         return false
-
         /*
    0 0 | 0 1 | 0 2
    1 0 | 1 1 | 1 2

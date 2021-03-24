@@ -8,42 +8,57 @@
     tools:context=".MainActivity" >
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/tableRow2"
+        android:id="@+id/tableRow3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="50dp"
         android:gravity="center">
 
         <TextView
-            android:id="@+id/textView"
-            android:layout_width="370dp"
-            android:layout_height="70dp"
+            android:id="@+id/textoTitulo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:fontFamily="@font/bangers"
             android:text="@string/titulo_tela_jogo"
-            android:textAlignment="center"
-            android:textSize="45sp"
+            android:textColor="#e67e22"
+            android:textSize="40dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textoVitoria"
-            android:layout_width="370dp"
-            android:layout_height="60dp"
-            android:background="#FFEB3B"
-            android:backgroundTint="#FFEB3B"
+            android:id="@+id/textoGameOver"
+            android:layout_width="364dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:background="#FFFFFF"
+            android:backgroundTint="#FFD400"
             android:fontFamily="@font/bangers"
-            android:text="Jogador X Venceu a partida"
+            android:text="Jogador X Venceu!!"
             android:textAlignment="center"
-            android:textColor="#F60404"
-            android:textColorHighlight="#FFEB3B"
-            android:textSize="38dp"
+            android:textColor="#F60303"
+            android:textColorHint="#BF5656"
+            android:textSize="30dp"
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
+            app:layout_constraintTop_toBottomOf="@+id/textoTitulo" />
 
+        <Button
+            android:id="@+id/botaoReset"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:backgroundTint="#FF5722"
+            android:onClick="pegarBotaoClicado"
+            android:text="Reiniciar"
+            android:textColor="#FFFFFF"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textoGameOver" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     <TableRow
         android:layout_width="match_parent"
@@ -147,18 +162,5 @@
             android:textSize="30sp" />
     </TableRow>
 
-    <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
-        <Button
-            android:id="@+id/botao_reset"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:onClick="pegarBotaoClicado"
-            android:text="Reiniciar "
-            android:textColor="#000000"
-            android:visibility="invisible" />
-
-    </TableRow>
 </TableLayout>
