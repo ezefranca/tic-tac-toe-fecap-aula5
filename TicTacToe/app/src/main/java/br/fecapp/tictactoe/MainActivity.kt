@@ -63,6 +63,22 @@ class MainActivity : AppCompatActivity() {
         if (idDoBotaoClicado == R.id.botaoReset) {
             textoGameOver.visibility = View.GONE
             botaoReset.visibility = View.GONE
+
+            var posicoesDoJogo: ArrayList<Button> = retornaBotoes()
+
+            posicoesDoJogo.forEach {
+                it.text = ""
+            }
+
+            acabouAPartida = false
+            jogador1Venceu = false
+            jogador2Venceu = false
+
+            deQuemEhAVez = true
+
+            jogador1 = ArrayList<Int>()
+            jogador2 = ArrayList<Int>()
+
         }
 
         // Verifica se o botão já foi clicado pelo jogador 1 ou jogador 2, caso sim, ele encerra a função com return
@@ -78,7 +94,7 @@ class MainActivity : AppCompatActivity() {
 
 
         if (deQuemEhAVez) {
-            simboloDaVez = "O"
+            simboloDaVez = "\uD83D\uDDE1"
             jogador1.add(idDoBotaoClicado)
             jogador1Venceu = checaSeJogadorVenceu(jogador1)
 
@@ -91,7 +107,7 @@ class MainActivity : AppCompatActivity() {
             }
 
         } else {
-            simboloDaVez = "X"
+            simboloDaVez = "\uD83D\uDC09"
             jogador2.add(idDoBotaoClicado)
 
             jogador2Venceu = checaSeJogadorVenceu(jogador2)
@@ -175,7 +191,7 @@ class MainActivity : AppCompatActivity() {
         else if (jogador.contains(R.id.botao_0_0) && jogador.contains(R.id.botao_1_1) && jogador.contains(R.id.botao_2_2)) {
             return true
         }
-        else if (jogador.contains(R.id.botao_0_2) && jogador.contains(R.id.botao_1_1) && jogador.contains(R.id.botao_2_2)) {
+        else if (jogador.contains(R.id.botao_0_2) && jogador.contains(R.id.botao_1_1) && jogador.contains(R.id.botao_2_0)) {
             return true
         }
         return false
@@ -187,4 +203,30 @@ class MainActivity : AppCompatActivity() {
 
  */
     }
+
+    fun retornaBotoes() : ArrayList<Button> {
+
+        var arrayBotoes:  ArrayList<Button> =  ArrayList<Button>()
+        val botao0_0 : Button = findViewById(R.id.botao_0_0)
+        arrayBotoes.add(botao0_0)
+        val botao0_1 : Button = findViewById(R.id.botao_0_1)
+        arrayBotoes.add(botao0_1)
+        val botao0_2 : Button = findViewById(R.id.botao_0_2)
+        arrayBotoes.add(botao0_2)
+        val botao1_0 : Button = findViewById(R.id.botao_1_0)
+        arrayBotoes.add(botao1_0)
+        val botao1_1 : Button = findViewById(R.id.botao_1_1)
+        arrayBotoes.add(botao1_1)
+        val botao1_2 : Button = findViewById(R.id.botao_1_2)
+        arrayBotoes.add(botao1_2)
+        val botao2_0 : Button = findViewById(R.id.botao_2_0)
+        arrayBotoes.add(botao2_0)
+        val botao2_1 : Button = findViewById(R.id.botao_2_1)
+        arrayBotoes.add(botao2_1)
+        val botao2_2 : Button = findViewById(R.id.botao_2_2)
+        arrayBotoes.add(botao2_2)
+        return arrayBotoes
+    }
+
+
 }
